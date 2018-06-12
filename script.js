@@ -7,6 +7,19 @@ class Stopwatch {
     }
 }
 
+    reset() {
+        this.times = {
+            minutes: 0,
+            seconds: 0,
+            miliseconds: 0
+        };
+    }
+}
+
+	print() {
+        this.display.innerText = this.format(this.times);
+}
+
 const stopwatch = new Stopwatch(
 document.querySelector('.stopwatch'));
 
@@ -15,3 +28,4 @@ startButton.addEventListener('click', () => stopwatch.start());
 
 let stopButton = document.getElementById('stop');
 stopButton.addEventListener('click', () => stopwatch.stop());
+
