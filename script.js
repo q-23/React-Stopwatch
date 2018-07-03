@@ -65,7 +65,7 @@ class StopWatch {
 }
 
 
-const StopWatch = new StopWatch(document.querySelector('.stopwatch'));
+const stopwatch = new StopWatch(document.querySelector('.stopwatch'));
 
 let startButton = document.getElementById('start');
 startButton.addEventListener('click', () => stopwatch.start());
