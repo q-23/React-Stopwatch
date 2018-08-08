@@ -13,3 +13,17 @@ body {
 	background-color:#74787a;
 }
 
+div {
+	width: 600px;
+	margin:0 auto;
+	margin-top: 20vh;
+}
+
+button {
+	background-color: transparent;
+	border: none;
+}
+
+.results {
+	margin-left: 80px;
+}

@@ -8,190 +8,218 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var StopWatch = function (_React$Component) {
-	_inherits(StopWatch, _React$Component);
+/*class Stopwatch {
+    constructor(display) {
+        this.running = false;
+        this.display = display;
+        this.reset();
+    }
 
-	function StopWatch(props) {
-		_classCallCheck(this, StopWatch);
+    reset() {
+        this.times = {
+            minutes: 0,
+            seconds: 0,
+            miliseconds: 0
+        };
+        this.print();
+    }
 
-		var _this = _possibleConstructorReturn(this, (StopWatch.__proto__ || Object.getPrototypeOf(StopWatch)).call(this, props));
+    print() {
+        this.display.innerText = this.format(this.times);
+    }
 
-		_this.reset = function () {
-			_this.setState({
-				times: {
-					minutes: 0,
-					seconds: 0,
-					miliseconds: 0
-				}
-			});
-		};
+    format(times) {
+        return `${pad0(times.minutes)}:${pad0(times.seconds)}:${pad0(Math.floor(times.miliseconds))}`;
+    }
 
-		_this.pad0 = function (value) {
-			var result = value.toString();
-			var resultLength = result.length;
-			if (resultLength < 2) {
-				result = 0 + result;
-			}
-			return result;
-		};
+    start() {
+        if (!this.running) {
+            this.running = true;
+            this.watch = setInterval(() => this.step(), 10);
+        }
+    }
 
-		_this.format = function () {
-			var minutes = _this.state.times.minutes;
-			var seconds = _this.state.times.seconds;
-			var miliseconds = _this.state.times.miliseconds;
-			return _this.pad0(minutes) + ':' + _this.pad0(seconds) + ':' + _this.pad0(Math.floor(miliseconds));
-		};
+    step() {
+        if (!this.running) return;
+        this.calculate();
+        this.print();
+    }
 
-		_this.start = function () {
-			if (!_this.state.running) {
-				_this.state.running = 'true';
-				_this.watch = setInterval(function () {
-					return _this.step();
-				}, 10);
-			}
-		};
+    calculate() {
+        this.times.miliseconds += 1;
+        if (this.times.miliseconds >= 100) {
+            this.times.seconds += 1;
+            this.times.miliseconds = 0;
+        }
+        if (this.times.seconds >= 60) {
+            this.times.minutes += 1;
+            this.times.seconds = 0;
+        }
+    }
 
-		_this.step = function () {
-			if (!_this.state.running) return;
-			_this.calculate();
-		};
+    stop() {
+        this.running = false;
+        clearInterval(this.watch);
+    }
 
-		_this.calculate = function () {
-			_this.setState({
-				times: {
-					minutes: _this.state.times.minutes,
-					seconds: _this.state.times.seconds,
-					miliseconds: _this.state.times.miliseconds + 1
-				}
-			});
+}
 
-			if (_this.state.times.miliseconds >= 100) {
-				_this.setState({
-					times: {
-						minutes: _this.state.times.minutes,
-						seconds: _this.state.times.seconds + 1,
-						miliseconds: 0
-					}
-				});
-			}
+const stopwatch = new Stopwatch(
+    document.querySelector('.stopwatch'));
 
-			if (_this.state.times.seconds >= 60) {
-				_this.setState({
-					times: {
-						minutes: _this.state.times.minutes + 1,
-						seconds: 0,
-						miliseconds: _this.state.times.miliseconds
-					}
-				});
-			}
-		};
+let startButton = document.getElementById('start');
+startButton.addEventListener('click', () => stopwatch.start());
 
-		_this.stop = function () {
-			_this.setState({
-				running: false
-			});
+let stopButton = document.getElementById('stop');
+stopButton.addEventListener('click', () => stopwatch.stop());
 
-			clearInterval(_this.watch);
-		};
+let resetButton = document.getElementById('reset');
+resetButton.addEventListener('click', () => stopwatch.reset());
 
-		_this.render = function () {
-			return React.createElement(
-				'div',
-				{ className: 'container' },
-				React.createElement(
-					'div',
-					{ className: 'tab-panel active', id: 'tab-1' },
-					React.createElement(
-						'nav',
-						null,
-						React.createElement(
-							'a',
-							{ href: '#', className: 'button', id: 'start', onClick: function onClick() {
-									return _this.start();
-								} },
-							'start'
-						),
-						React.createElement(
-							'a',
-							{ href: '#', className: 'button', id: 'stop', onClick: function onClick() {
-									_this.stop();
-								} },
-							'stop'
-						)
-					),
-					React.createElement(Display, { time: _this.format() })
-				),
-				React.createElement(Results, { history: _this.state.history, className: 'tab-panel', id: 'tab-2' })
-			);
-		};
+function pad0(value) {
+    let result = value.toString();
+    if (result.length < 2) {
+        result = '0' + result;
+    }
+    return result;
+}
+*/
 
-		_this.state = {
-			running: false,
-			times: {
-				minutes: 0,
-				seconds: 0,
-				miliseconds: 0
-			},
-			history: []
-		};
+var Stopwatch = function (_React$Component) {
+    _inherits(Stopwatch, _React$Component);
 
-		return _this;
-	}
+    function Stopwatch() {
+        _classCallCheck(this, Stopwatch);
 
-	return StopWatch;
+        var _this = _possibleConstructorReturn(this, (Stopwatch.__proto__ || Object.getPrototypeOf(Stopwatch)).call(this));
+
+        _this.state = {
+            running: false,
+            times: {
+                minutes: 0,
+                seconds: 0,
+                miliseconds: 0
+            }
+        };
+        return _this;
+    }
+
+    _createClass(Stopwatch, [{
+        key: 'reset',
+        value: function reset() {
+            this.setState({
+                times: {
+                    minutes: 0,
+                    seconds: 0,
+                    miliseconds: 0
+                }
+            });
+        }
+    }, {
+        key: 'format',
+        value: function format() {
+            return pad0(this.state.times.minutes) + ':' + pad0(this.state.times.seconds) + ':' + pad0(Math.floor(this.state.times.miliseconds));
+        }
+    }, {
+        key: 'start',
+        value: function start() {
+            var _this2 = this;
+
+            if (!this.state.running) {
+                this.setState({ running: true });
+                this.watch = setInterval(function () {
+                    return _this2.step();
+                }, 10);
+            }
+        }
+    }, {
+        key: 'step',
+        value: function step() {
+            if (!this.state.running) return;
+            this.calculate();
+        }
+    }, {
+        key: 'calculate',
+        value: function calculate() {
+            var _state$times = this.state.times,
+                miliseconds = _state$times.miliseconds,
+                seconds = _state$times.seconds,
+                minutes = _state$times.minutes;
+
+
+            miliseconds += 1;
+            if (miliseconds >= 100) {
+                seconds += 1;
+                miliseconds = 0;
+            }
+            if (seconds >= 60) {
+                minutes += 1;
+                seconds = 0;
+            }
+
+            this.setState({
+                times: {
+                    miliseconds: miliseconds,
+                    seconds: seconds,
+                    minutes: minutes
+                }
+            });
+        }
+    }, {
+        key: 'stop',
+        value: function stop() {
+            this.setState({ running: false });
+            clearInterval(this.watch);
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this3 = this;
+
+            return React.createElement(
+                'div',
+                null,
+                React.createElement(
+                    'button',
+                    { onClick: function onClick() {
+                            return _this3.start();
+                        } },
+                    'Start'
+                ),
+                React.createElement(
+                    'button',
+                    { onClick: function onClick() {
+                            return _this3.stop();
+                        } },
+                    'Stop'
+                ),
+                React.createElement(
+                    'button',
+                    { onClick: function onClick() {
+                            return _this3.reset();
+                        } },
+                    'Reset'
+                ),
+                React.createElement(
+                    'div',
+                    { className: 'results' },
+                    ' ',
+                    this.format(),
+                    ' '
+                )
+            );
+        }
+    }]);
+
+    return Stopwatch;
 }(React.Component);
 
-var Display = function (_React$Component2) {
-	_inherits(Display, _React$Component2);
+function pad0(value) {
+    var result = value.toString();
+    if (result.length < 2) {
+        result = '0' + result;
+    }
+    return result;
+}
 
-	function Display(props) {
-		_classCallCheck(this, Display);
-
-		return _possibleConstructorReturn(this, (Display.__proto__ || Object.getPrototypeOf(Display)).call(this, props));
-	}
-
-	_createClass(Display, [{
-		key: 'render',
-		value: function render() {
-			return React.createElement('div', { className: 'stopWatch' }, this.props.time);
-		}
-	}]);
-
-	return Display;
-}(React.Component);
-
-Display.propTypes = {
-	time: React.PropTypes.string.isRequired
-};
-
-var Results = function (_React$Component3) {
-	_inherits(Results, _React$Component3);
-
-	function Results(props) {
-		_classCallCheck(this, Results);
-
-		return _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this, props));
-	}
-
-	_createClass(Results, [{
-		key: 'render',
-		value: function render() {
-			var results = this.props.history.map(function (ele) {
-				return React.createElement('li', { key: ele.id }, ele.record);
-			});
-			return React.createElement('ol', { className: 'results' }, React.createElement('p', {}, "Results"), results);
-		}
-	}]);
-
-	return Results;
-}(React.Component);
-
-Results.propTypes = {
-
-	history: React.PropTypes.array.isRequired
-
-};
-
-var element = React.createElement(StopWatch);
-
-ReactDOM.render(element, document.getElementById('app'));
+ReactDOM.render(React.createElement(Stopwatch, null), document.getElementById('app'));
