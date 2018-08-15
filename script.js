@@ -57,13 +57,13 @@ class Stopwatch {
 const stopwatch = new Stopwatch(
     document.querySelector('.stopwatch'));
 
-let startButton = document.getElementById('start');
+const startButton = document.getElementById('start');
 startButton.addEventListener('click', () => stopwatch.start());
 
-let stopButton = document.getElementById('stop');
+const stopButton = document.getElementById('stop');
 stopButton.addEventListener('click', () => stopwatch.stop());
 
-let resetButton = document.getElementById('reset');
+const resetButton = document.getElementById('reset');
 resetButton.addEventListener('click', () => stopwatch.reset());
 
 function pad0(value) {
@@ -73,7 +73,6 @@ function pad0(value) {
     }
     return result;
 }
-*/
 
 class Stopwatch extends React.Component {
     constructor() {
@@ -151,7 +150,7 @@ class Stopwatch extends React.Component {
     }
 }
 
-function pad0(value) {
+let pad0 = (value) => {
     let result = value.toString();
     if (result.length < 2) {
         result = '0' + result;
